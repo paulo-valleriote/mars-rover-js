@@ -1,10 +1,7 @@
 import IPlateau from '../interfaces/plateau'
+import { getPlateauCoordinates } from '../utils/coordinates'
 
-export default function createPlateau(x: number, y: number) {
-	const plateau: IPlateau = {
-		x: x,
-		y: y,
-	}
-
+export default function createPlateau(coordinates: string) {
+	const plateau: IPlateau = getPlateauCoordinates(coordinates)
 	return plateau
 }

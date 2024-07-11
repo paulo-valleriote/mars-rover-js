@@ -1,13 +1,10 @@
 import IPlateau from '../interfaces/plateau'
 import IRover from '../interfaces/rover'
+import { getLandingCoordinates } from '../utils/coordinates'
 
-export default function createRover(x: number, y: number, orientation: string) {
+export default function createRover(coordinates: string) {
 	const rover: IRover = {
-		coordinates: {
-			x: x,
-			y: y,
-			orientation: orientation,
-		},
+		coordinates: getLandingCoordinates(coordinates),
 		execute: execute,
 		moveForward: moveForward,
 	}

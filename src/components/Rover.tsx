@@ -4,24 +4,15 @@ import ControlInput from './ControlInput'
 import saveLog from '@/src/actions/saveLog'
 import createPlateau from '@/src/actions/createPlateau'
 import createRover from '@/src/actions/createRover'
-import {
-	formatFinalCoordinatesToString,
-	getLandingCoordinates,
-	getPlateauCoordinates,
-} from '@/src/utils/coordinates'
-import {
-	validateCommands,
-	validateCoordinates,
-	validatePosition,
-	validatePositionRelatedToPlateau,
-	validateUserId,
-} from '@/src/utils/validator'
+import { formatFinalCoordinatesToString } from '@/src/utils/coordinates'
 import ILogPostResponse from '../interfaces/log/http/ILogPostResponse'
+import IRoverState from '../interfaces/rover/IRoverState'
+import validateRoverState from '../actions/validateRoverState'
 
 function Rover() {
-	const [roverState, setRoverState] = useState({
+	const [roverState, setRoverState] = useState<IRoverState>({
 		userId: 0,
-		coordinates: '',
+		plateauMaxCoordinates: '',
 		landingPosition: '',
 		commands: '',
 	})
@@ -36,19 +27,10 @@ function Rover() {
 		e.preventDefault()
 
 		try {
-			validateRoverState()
+			validateRoverState(roverState)
 
-			const { x: plateauX, y: plateauY } = getPlateauCoordinates(
-				roverState.coordinates
-			)
-			const plateau = createPlateau(plateauX, plateauY)
-
-			const {
-				x: roverX,
-				y: roverY,
-				orientation: roverOrientation,
-			} = getLandingCoordinates(roverState.landingPosition)
-			const rover = createRover(roverX, roverY, roverOrientation)
+			const plateau = createPlateau(roverState.plateauMaxCoordinates)
+			const rover = createRover(roverState.landingPosition)
 
 			const finalCoordinates = rover.execute(
 				rover,
@@ -74,7 +56,7 @@ function Rover() {
 			setRoverState({
 				userId: 0,
 				commands: '',
-				coordinates: '',
+				plateauMaxCoordinates: '',
 				landingPosition: '',
 			})
 		} catch (error) {
@@ -84,17 +66,6 @@ function Rover() {
 				errorMessage: (error as Error).message,
 			})
 		}
-	}
-
-	const validateRoverState = () => {
-		validateCommands(roverState.commands)
-		validateCoordinates(roverState.coordinates)
-		validateUserId(roverState.userId)
-		validatePosition(roverState.landingPosition)
-		validatePositionRelatedToPlateau(
-			roverState.coordinates,
-			roverState.landingPosition
-		)
 	}
 
 	return (
@@ -112,9 +83,12 @@ function Rover() {
 				/>
 				<ControlInput
 					label='Upper-right Coordinates'
-					inputValue={roverState.coordinates}
+					inputValue={roverState.plateauMaxCoordinates}
 					onChangeHandler={(e) =>
-						setRoverState({ ...roverState, coordinates: e.target.value })
+						setRoverState({
+							...roverState,
+							plateauMaxCoordinates: e.target.value,
+						})
 					}
 					placeholder='Exemple: 3,3'
 				/>
