@@ -1,20 +1,20 @@
 'use client'
 import { FormEvent, useState } from 'react'
 import ControlInput from './ControlInput'
-import saveLog from '@/app/actions/saveLog'
-import createPlateau from '@/app/actions/createPlateau'
-import createRover from '@/app/actions/createRover'
+import saveLog from '@/src/actions/saveLog'
+import createPlateau from '@/src/actions/createPlateau'
+import createRover from '@/src/actions/createRover'
 import {
 	formatFinalCoordinatesToString,
 	getLandingCoordinates,
 	getPlateauCoordinates,
-} from '@/app/utils/coordinates'
+} from '@/src/utils/coordinates'
 import {
 	validateCommands,
 	validateCoordinates,
 	validatePosition,
 	validateUserId,
-} from '@/app/utils/validator'
+} from '@/src/utils/validator'
 
 function Rover() {
 	const [roverState, setRooverState] = useState({

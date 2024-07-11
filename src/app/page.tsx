@@ -1,5 +1,5 @@
 'use client'
-import Rover from '@/components/Rover'
+import Rover from '@/src/components/Rover'
 
 export default function Home() {
 	return (
