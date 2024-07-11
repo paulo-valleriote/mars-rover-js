@@ -1,19 +1,8 @@
-import { Plateau } from './createPlateau'
-
-export interface Coordinates {
-	x: number
-	y: number
-	orientation: string
-}
-
-interface Rover {
-	coordinates: Coordinates
-	execute: (rover: Rover, commands: string, plateau: Plateau) => Coordinates
-	moveForward: (rover: Rover, plateau: Plateau) => void
-}
+import IPlateau from '../interfaces/plateau'
+import IRover from '../interfaces/rover'
 
 export default function createRover(x: number, y: number, orientation: string) {
-	const rover: Rover = {
+	const rover: IRover = {
 		coordinates: {
 			x: x,
 			y: y,
@@ -26,7 +15,7 @@ export default function createRover(x: number, y: number, orientation: string) {
 	return rover
 }
 
-function execute(rover: Rover, commands: string, plateau: Plateau) {
+function execute(rover: IRover, commands: string, plateau: IPlateau) {
 	const directions = ['N', 'E', 'S', 'W']
 
 	for (let command of commands) {
@@ -52,7 +41,7 @@ function execute(rover: Rover, commands: string, plateau: Plateau) {
 	return rover.coordinates
 }
 
-function moveForward(rover: Rover, plateau: Plateau) {
+function moveForward(rover: IRover, plateau: IPlateau) {
 	switch (rover.coordinates.orientation) {
 		case 'N':
 			if (rover.coordinates.y + 1 <= plateau.y) rover.coordinates.y += 1

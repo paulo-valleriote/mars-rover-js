@@ -1,7 +1,8 @@
+import ILogPostRequest from '@/src/interfaces/log/http/ILogPostRequest'
 import prisma from '@/src/lib/prisma'
 
-export async function POST(req: Request) {
-	const body = await req.json()
+export async function POST(req: Request): Promise<Response> {
+	const body: ILogPostRequest = await req.json()
 	const { userId, initialCoordinates, finalCoordinates, commands } = body
 
 	const savedLog = await prisma.log.create({

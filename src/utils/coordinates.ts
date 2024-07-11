@@ -1,4 +1,4 @@
-import { Coordinates } from '../actions/createRover'
+import ICoordinates from '../interfaces/coordinates'
 
 const allowedOrientations = ['N', 'E', 'S', 'W']
 
@@ -33,6 +33,6 @@ export const formatFinalCoordinatesToString = ({
 	x,
 	y,
 	orientation,
-}: Coordinates) => {
+}: ICoordinates) => {
 	return `${x} ${y} ${orientation}`
 }

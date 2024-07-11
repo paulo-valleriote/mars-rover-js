@@ -1,10 +1,7 @@
-export interface Plateau {
-	x: number
-	y: number
-}
+import IPlateau from '../interfaces/plateau'
 
 export default function createPlateau(x: number, y: number) {
-	const plateau: Plateau = {
+	const plateau: IPlateau = {
 		x: x,
 		y: y,
 	}

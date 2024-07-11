@@ -13,8 +13,10 @@ import {
 	validateCommands,
 	validateCoordinates,
 	validatePosition,
+	validatePositionRelatedToPlateau,
 	validateUserId,
 } from '@/src/utils/validator'
+import ILogPostResponse from '../interfaces/log/http/ILogPostResponse'
 
 function Rover() {
 	const [roverState, setRooverState] = useState({
@@ -57,7 +59,7 @@ function Rover() {
 			const formatedFinalCoordinates =
 				formatFinalCoordinatesToString(finalCoordinates)
 
-			const result = await saveLog({
+			const result: ILogPostResponse = await saveLog({
 				userId: roverState.userId,
 				initialCoordinates: roverState.landingPosition,
 				finalCoordinates: formatedFinalCoordinates,
@@ -76,7 +78,11 @@ function Rover() {
 				landingPosition: '',
 			})
 		} catch (error) {
-			setDisplay({ ...display, errorMessage: (error as Error).message })
+			setDisplay({
+				positionMessage: '',
+				logMessage: '',
+				errorMessage: (error as Error).message,
+			})
 		}
 	}
 
@@ -85,6 +91,10 @@ function Rover() {
 		validateCoordinates(roverState.coordinates)
 		validateUserId(roverState.userId)
 		validatePosition(roverState.landingPosition)
+		validatePositionRelatedToPlateau(
+			roverState.coordinates,
+			roverState.landingPosition
+		)
 	}
 
 	return (
@@ -131,6 +141,7 @@ function Rover() {
 					Send Commands
 				</button>
 			</form>
+
 			{display.errorMessage && (
 				<div className='w-full text-center text-red-300'>
 					{display.errorMessage}

@@ -1,3 +1,5 @@
+import { getLandingCoordinates, getPlateauCoordinates } from './coordinates'
+
 export const validateCommands = (commands: string) => {
 	commands = commands.toLowerCase()
 	const valid = ['m', 'l', 'r']
@@ -21,6 +23,21 @@ export const validateCoordinates = (coordinates: string) => {
 		}
 	} else {
 		throw new Error('Invalid coordinate format')
+	}
+}
+
+export const validatePositionRelatedToPlateau = (
+	coordinates: string,
+	position: string
+) => {
+	const formatedRoverPosition = getLandingCoordinates(position)
+	const formatedPlateauMaxCoordinates = getPlateauCoordinates(coordinates)
+
+	if (
+		formatedRoverPosition.x > formatedPlateauMaxCoordinates.x ||
+		formatedRoverPosition.x > formatedPlateauMaxCoordinates.y
+	) {
+		throw new Error('Rover cant be in a position outside plateau limits')
 	}
 }
 

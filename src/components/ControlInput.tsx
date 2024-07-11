@@ -1,12 +1,6 @@
-import { ChangeEventHandler } from 'react'
+import IControlInputProps from '../interfaces/components/IControlInputProps'
 
-interface ControlInputProps {
-	label: string
-	placeholder?: string
-	inputValue: string | number
-	onChangeHandler: ChangeEventHandler<HTMLInputElement>
-}
-function ControlInput(props: ControlInputProps) {
+function ControlInput(props: IControlInputProps) {
 	return (
 		<div className='flex w-full justify-between gap-2'>
 			<label>{props.label}:</label>

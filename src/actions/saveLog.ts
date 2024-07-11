@@ -1,11 +1,6 @@
-export interface Log {
-	userId: number
-	initialCoordinates: string
-	finalCoordinates: string
-	commands: string
-}
+import ILog from '../interfaces/log'
 
-const saveLog = async (log: Log) => {
+const saveLog = async (log: ILog) => {
 	const response = await fetch('/api/log', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
