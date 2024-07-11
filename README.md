@@ -7,16 +7,16 @@ Feito utilizando NextJS | TypeScript | PrismaORM | TailwindCSS
 Iniciar o projeto:
 
 - Instale as dependências com
-    "npm install" ou "npm i"
+  - "npm install" ou "npm i"
 
 - Crie um arquivo .env com as seguintes variaveis
-    POSTGRES_URL=postgresql://postgres:admin@localhost:5432/db
+  - POSTGRES_URL=postgresql://postgres:admin@localhost:5432/db
 
 - Execute o Docker com "docker compose up"
 
 - Execute os comandos do prisma
-    "npx prisma db push"
-    "npx prisma generate"
+  - "npx prisma db push"
+  - "npx prisma generate"
 
 - Execute o projeto com
-    "npm run dev"
+  - "npm run dev"
