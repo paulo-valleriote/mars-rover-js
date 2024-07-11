@@ -19,7 +19,7 @@ import {
 import ILogPostResponse from '../interfaces/log/http/ILogPostResponse'
 
 function Rover() {
-	const [roverState, setRooverState] = useState({
+	const [roverState, setRoverState] = useState({
 		userId: 0,
 		coordinates: '',
 		landingPosition: '',
@@ -71,7 +71,7 @@ function Rover() {
 				logMessage: result.message,
 				errorMessage: '',
 			})
-			setRooverState({
+			setRoverState({
 				userId: 0,
 				commands: '',
 				coordinates: '',
@@ -107,14 +107,14 @@ function Rover() {
 					label='User ID'
 					inputValue={roverState.userId}
 					onChangeHandler={(e) =>
-						setRooverState({ ...roverState, userId: Number(e.target.value) })
+						setRoverState({ ...roverState, userId: Number(e.target.value) })
 					}
 				/>
 				<ControlInput
 					label='Upper-right Coordinates'
 					inputValue={roverState.coordinates}
 					onChangeHandler={(e) =>
-						setRooverState({ ...roverState, coordinates: e.target.value })
+						setRoverState({ ...roverState, coordinates: e.target.value })
 					}
 					placeholder='Exemple: 3,3'
 				/>
@@ -122,7 +122,7 @@ function Rover() {
 					label='Current Position'
 					inputValue={roverState.landingPosition}
 					onChangeHandler={(e) =>
-						setRooverState({ ...roverState, landingPosition: e.target.value })
+						setRoverState({ ...roverState, landingPosition: e.target.value })
 					}
 					placeholder='Exemple: 1 2 N'
 				/>
@@ -130,7 +130,7 @@ function Rover() {
 					label='Commands'
 					inputValue={roverState.commands}
 					onChangeHandler={(e) =>
-						setRooverState({ ...roverState, commands: e.target.value })
+						setRoverState({ ...roverState, commands: e.target.value })
 					}
 					placeholder='Exemple: LMMR'
 				/>
